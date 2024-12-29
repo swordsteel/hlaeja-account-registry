@@ -18,6 +18,10 @@ spring:
   config:
     activate:
       on-profile: development
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/account_registry
+    username: services
+    password: password
 
 ---
 ##########################
@@ -27,6 +31,10 @@ spring:
   config:
     activate:
       on-profile: docker
+  r2dbc:
+    url: r2dbc:postgresql://PostgreSQL:5432/account_registry
+    username: services
+    password: password
 
 ---
 ##############################

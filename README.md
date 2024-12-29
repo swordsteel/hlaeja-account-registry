@@ -7,6 +7,9 @@ In twilight's hush, where mythic tales unfold, A ledger of legends, the bravest 
 | name                   | required | info                    |
 |------------------------|:--------:|-------------------------|
 | spring.profiles.active | &check;  | Spring Boot environment |
+| spring.r2dbc.url       | &check;  | Postgres host url       |
+| spring.r2dbc.username  | &check;  | Postgres username       |
+| spring.r2dbc.password  | &cross;  | Postgres password       |
 
 *Required: &check; can be stored as text, and &cross; need to be stored as secret.*
 

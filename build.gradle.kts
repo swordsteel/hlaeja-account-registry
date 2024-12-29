@@ -11,7 +11,11 @@ dependencies {
     implementation(hlaeja.kotlin.reflect)
     implementation(hlaeja.kotlinx.coroutines)
     implementation(hlaeja.springboot.starter.actuator)
+    implementation(hlaeja.springboot.starter.r2dbc)
     implementation(hlaeja.springboot.starter.webflux)
+
+    runtimeOnly(hlaeja.postgresql)
+    runtimeOnly(hlaeja.postgresql.r2dbc)
 
     testImplementation(hlaeja.assertj.core)
     testImplementation(hlaeja.mockk)

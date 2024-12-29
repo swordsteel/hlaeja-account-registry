@@ -1,0 +1,24 @@
+{
+  "properties": [
+    {
+      "name": "spring.application.version",
+      "type": "java.lang.String",
+      "description": "Application version."
+    },
+    {
+      "name": "spring.application.build.time",
+      "type": "java.lang.String",
+      "description": "Application build time."
+    },
+    {
+      "name": "spring.application.build.os.name",
+      "type": "java.lang.String",
+      "description": "Application build os name."
+    },
+    {
+      "name": "spring.application.build.os.version",
+      "type": "java.lang.String",
+      "description": "Application build os version."
+    }
+  ]
+}

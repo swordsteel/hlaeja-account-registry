@@ -1,6 +1,7 @@
 plugins {
     alias(hlaeja.plugins.kotlin.jvm)
     alias(hlaeja.plugins.kotlin.spring)
+    alias(hlaeja.plugins.ltd.hlaeja.plugin.certificate)
     alias(hlaeja.plugins.ltd.hlaeja.plugin.service)
     alias(hlaeja.plugins.spring.dependency.management)
     alias(hlaeja.plugins.springframework.boot)
@@ -11,8 +12,10 @@ dependencies {
     implementation(hlaeja.kotlin.reflect)
     implementation(hlaeja.kotlinx.coroutines)
     implementation(hlaeja.library.hlaeja.common.messages)
+    implementation(hlaeja.library.hlaeja.jwt)
     implementation(hlaeja.springboot.starter.actuator)
     implementation(hlaeja.springboot.starter.r2dbc)
+    implementation(hlaeja.springboot.starter.security)
     implementation(hlaeja.springboot.starter.webflux)
 
     runtimeOnly(hlaeja.postgresql)
@@ -29,3 +32,7 @@ dependencies {
 }
 
 group = "ltd.hlaeja"
+
+tasks.named("processResources") {
+    dependsOn("copyCertificates")
+}

@@ -1,0 +1,8 @@
+jwt:
+  private-key: cert/valid-private-key.pem
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://placeholder
+    username: placeholder
+    password: placeholder

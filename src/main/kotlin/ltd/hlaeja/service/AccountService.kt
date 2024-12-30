@@ -21,4 +21,10 @@ class AccountService(
     ): Mono<AccountEntity> = accountRepository.findById(uuid)
         .doOnNext { log.debug { "Get account ${it.id}" } }
         .switchIfEmpty(Mono.error(ResponseStatusException(HttpStatus.NOT_FOUND)))
+
+    fun getUserByUsername(
+        username: String,
+    ): Mono<AccountEntity> = accountRepository.findByUsername(username)
+        .doOnNext { log.debug { "Get account ${it.id} for username $username" } }
+        .switchIfEmpty(Mono.error(ResponseStatusException(HttpStatus.NOT_FOUND)))
 }

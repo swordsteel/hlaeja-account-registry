@@ -1,0 +1,44 @@
+### Get admin information
+POST {{hostname}}/authenticate
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "pass"
+}
+
+### Get user information
+POST {{hostname}}/authenticate
+Content-Type: application/json
+
+{
+    "username": "user",
+    "password": "pass"
+}
+
+### Get bad user
+POST {{hostname}}/authenticate
+Content-Type: application/json
+
+{
+    "username": "bad user",
+    "password": "pass"
+}
+
+### Get bad pass
+POST {{hostname}}/authenticate
+Content-Type: application/json
+
+{
+    "username": "user",
+    "password": "bad pass"
+}
+
+### Get disabled user
+POST {{hostname}}/authenticate
+Content-Type: application/json
+
+{
+    "username": "disabled",
+    "password": "pass"
+}

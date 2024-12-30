@@ -10,14 +10,21 @@ In twilight's hush, where mythic tales unfold, A ledger of legends, the bravest 
 | spring.r2dbc.url       | &check;  | Postgres host url       |
 | spring.r2dbc.username  | &check;  | Postgres username       |
 | spring.r2dbc.password  | &cross;  | Postgres password       |
+| jwt.private-key        | &check;  | JWT private key file    |
 
 *Required: &check; can be stored as text, and &cross; need to be stored as secret.*
 
-## Releasing Service
+## Development Configuration
 
 Run `release.sh` script from `master` branch.
 
 ## Development Information
+
+### Private RSA Key
+
+This service uses RAS keys to create identities for users. The private key is used here to generate identities, while the public key is used by **[Hlæja Registry API](https://github.com/swordsteel/hlaeja-registry-api)** to identify a users and accept data.
+
+*For instructions on how to set these up, please refer to our [generate RSA key](https://github.com/swordsteel/hlaeja-development/blob/master/doc/rsa_key.md) documentation.*
 
 ### Global Setting
 

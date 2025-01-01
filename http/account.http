@@ -1,2 +1,16 @@
 ### get user by id
 GET {{hostname}}/account-00000000-0000-7000-0000-000000000001
+
+### Get admin information
+POST {{hostname}}/account
+Content-Type: application/json
+
+{
+    "username": "user01010101",
+    "password": "p4ssw0rd",
+    "enabled": true,
+    "roles": [
+        "ROLE_ADMIN",
+        "ROLE_TEST"
+    ]
+}

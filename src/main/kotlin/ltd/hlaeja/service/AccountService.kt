@@ -1,6 +1,7 @@
 package ltd.hlaeja.service
 
 import io.github.oshai.kotlinlogging.KotlinLogging
+import java.lang.IllegalArgumentException
 import java.util.UUID
 import ltd.hlaeja.entity.AccountEntity
 import ltd.hlaeja.repository.AccountRepository
@@ -8,6 +9,7 @@ import org.springframework.dao.DuplicateKeyException
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 private val log = KotlinLogging.logger {}
@@ -40,4 +42,13 @@ class AccountService(
                 else -> Mono.error(ResponseStatusException(HttpStatus.BAD_REQUEST))
             }
         }
+
+    fun getAccounts(page: Int, size: Int): Flux<AccountEntity> = try {
+        accountRepository.findAll()
+            .skip((page - 1).toLong() * size)
+            .take(size.toLong())
+            .doOnNext { log.debug { "Retrieved accounts $page with size $size" } }
+    } catch (e: IllegalArgumentException) {
+        Flux.error(ResponseStatusException(HttpStatus.BAD_REQUEST))
+    }
 }

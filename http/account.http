@@ -14,3 +14,12 @@ Content-Type: application/json
         "ROLE_TEST"
     ]
 }
+
+### Get accounts
+GET {{hostname}}/accounts
+
+### Get accounts
+GET {{hostname}}/accounts/page-1
+
+### Get accounts
+GET {{hostname}}/accounts/page-1/show-5

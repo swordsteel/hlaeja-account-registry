@@ -153,11 +153,11 @@ class AccountServiceTest {
         every { accountRepository.findAll() } returns accounts
 
         // when
-        StepVerifier.create(accountService.getAccounts(1,2))
+        StepVerifier.create(accountService.getAccounts(1, 2))
             .expectNextMatches { accountEntity ->
                 accountEntity.username == "username1"
             }
-            .expectNextMatches {accountEntity ->
+            .expectNextMatches { accountEntity ->
                 accountEntity.username == "username2"
             }
             .verifyComplete()
@@ -172,7 +172,7 @@ class AccountServiceTest {
         every { accountRepository.findAll() } returns accounts
 
         // when
-        StepVerifier.create(accountService.getAccounts(-1,10))
+        StepVerifier.create(accountService.getAccounts(-1, 10))
             .expectErrorMatches { error ->
                 error is ResponseStatusException && error.statusCode == BAD_REQUEST
             }
@@ -188,7 +188,7 @@ class AccountServiceTest {
         every { accountRepository.findAll() } returns accounts
 
         // when
-        StepVerifier.create(accountService.getAccounts(1,-10))
+        StepVerifier.create(accountService.getAccounts(1, -10))
             .expectErrorMatches { error ->
                 error is ResponseStatusException && error.statusCode == BAD_REQUEST
             }
@@ -196,5 +196,51 @@ class AccountServiceTest {
 
         // then
         verify { accountRepository.findAll() }
+    }
+
+    @Test
+    fun `update account - success`() {
+        // given
+        every { accountRepository.save(any()) } returns Mono.just(accountEntity)
+
+        // when
+        StepVerifier.create(accountService.updateAccount(accountEntity))
+            .expectNext(accountEntity)
+            .verifyComplete()
+
+        // then
+        verify { accountRepository.save(any()) }
+    }
+
+    @Test
+    fun `update account - fail duplicated user`() {
+        // given
+        every { accountRepository.save(any()) } returns Mono.error(DuplicateKeyException("Test"))
+
+        // when
+        StepVerifier.create(accountService.updateAccount(accountEntity))
+            .expectErrorMatches { error ->
+                error is ResponseStatusException && error.statusCode == CONFLICT
+            }
+            .verify()
+
+        // then
+        verify { accountRepository.save(any()) }
+    }
+
+    @Test
+    fun `update account - fail`() {
+        // given
+        every { accountRepository.save(any()) } returns Mono.error(RuntimeException())
+
+        // when
+        StepVerifier.create(accountService.updateAccount(accountEntity))
+            .expectErrorMatches { error ->
+                error is ResponseStatusException && error.statusCode == BAD_REQUEST
+            }
+            .verify()
+
+        // then
+        verify { accountRepository.save(any()) }
     }
 }

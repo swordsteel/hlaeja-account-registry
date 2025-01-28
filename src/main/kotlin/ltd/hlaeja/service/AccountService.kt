@@ -35,13 +35,7 @@ class AccountService(
         accountEntity: AccountEntity,
     ): Mono<AccountEntity> = accountRepository.save(accountEntity)
         .doOnNext { log.debug { "Added new type: $it.id" } }
-        .onErrorResume {
-            log.debug { it.localizedMessage }
-            when {
-                it is DuplicateKeyException -> Mono.error(ResponseStatusException(HttpStatus.CONFLICT))
-                else -> Mono.error(ResponseStatusException(HttpStatus.BAD_REQUEST))
-            }
-        }
+        .onErrorResume(::onSaveError)
 
     fun getAccounts(page: Int, size: Int): Flux<AccountEntity> = try {
         accountRepository.findAll()
@@ -49,6 +43,20 @@ class AccountService(
             .take(size.toLong())
             .doOnNext { log.debug { "Retrieved accounts $page with size $size" } }
     } catch (e: IllegalArgumentException) {
-        Flux.error(ResponseStatusException(HttpStatus.BAD_REQUEST))
+        Flux.error(ResponseStatusException(HttpStatus.BAD_REQUEST, null, e))
+    }
+
+    fun updateAccount(
+        accountEntity: AccountEntity,
+    ): Mono<AccountEntity> = accountRepository.save(accountEntity)
+        .doOnNext { log.debug { "updated users: $it.id" } }
+        .onErrorResume(::onSaveError)
+
+    private fun onSaveError(throwable: Throwable): Mono<out AccountEntity> {
+        log.debug { throwable.localizedMessage }
+        return when {
+            throwable is DuplicateKeyException -> Mono.error(ResponseStatusException(HttpStatus.CONFLICT))
+            else -> Mono.error(ResponseStatusException(HttpStatus.BAD_REQUEST))
+        }
     }
 }

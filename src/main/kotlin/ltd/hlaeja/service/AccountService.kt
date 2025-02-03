@@ -7,6 +7,9 @@ import ltd.hlaeja.entity.AccountEntity
 import ltd.hlaeja.repository.AccountRepository
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.BAD_REQUEST
+import org.springframework.http.HttpStatus.CONFLICT
+import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 import reactor.core.publisher.Flux
@@ -23,13 +26,13 @@ class AccountService(
         uuid: UUID,
     ): Mono<AccountEntity> = accountRepository.findById(uuid)
         .doOnNext { log.debug { "Get account ${it.id}" } }
-        .switchIfEmpty(Mono.error(ResponseStatusException(HttpStatus.NOT_FOUND)))
+        .switchIfEmpty(Mono.error(ResponseStatusException(NOT_FOUND)))
 
     fun getUserByUsername(
         username: String,
     ): Mono<AccountEntity> = accountRepository.findByUsername(username)
         .doOnNext { log.debug { "Get account ${it.id} for username $username" } }
-        .switchIfEmpty(Mono.error(ResponseStatusException(HttpStatus.NOT_FOUND)))
+        .switchIfEmpty(Mono.error(ResponseStatusException(NOT_FOUND)))
 
     fun addAccount(
         accountEntity: AccountEntity,
@@ -43,7 +46,7 @@ class AccountService(
             .take(size.toLong())
             .doOnNext { log.debug { "Retrieved accounts $page with size $size" } }
     } catch (e: IllegalArgumentException) {
-        Flux.error(ResponseStatusException(HttpStatus.BAD_REQUEST, null, e))
+        Flux.error(ResponseStatusException(BAD_REQUEST, null, e))
     }
 
     fun updateAccount(
@@ -55,8 +58,8 @@ class AccountService(
     private fun onSaveError(throwable: Throwable): Mono<out AccountEntity> {
         log.debug { throwable.localizedMessage }
         return when {
-            throwable is DuplicateKeyException -> Mono.error(ResponseStatusException(HttpStatus.CONFLICT))
-            else -> Mono.error(ResponseStatusException(HttpStatus.BAD_REQUEST))
+            throwable is DuplicateKeyException -> Mono.error(ResponseStatusException(CONFLICT))
+            else -> Mono.error(ResponseStatusException(BAD_REQUEST))
         }
     }
 }

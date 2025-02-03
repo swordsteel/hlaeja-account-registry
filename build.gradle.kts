@@ -16,6 +16,7 @@ dependencies {
     implementation(hlaeja.springboot.starter.actuator)
     implementation(hlaeja.springboot.starter.r2dbc)
     implementation(hlaeja.springboot.starter.security)
+    implementation(hlaeja.springboot.starter.validation)
     implementation(hlaeja.springboot.starter.webflux)
 
     runtimeOnly(hlaeja.postgresql)
@@ -29,6 +30,15 @@ dependencies {
     testImplementation(hlaeja.springboot.starter.test)
 
     testRuntimeOnly(hlaeja.junit.platform.launcher)
+
+    integrationTestImplementation(hlaeja.assertj.core)
+    integrationTestImplementation(hlaeja.library.hlaeja.test)
+    integrationTestImplementation(hlaeja.projectreactor.reactor.test)
+    integrationTestImplementation(hlaeja.kotlin.test.junit5)
+    integrationTestImplementation(hlaeja.kotlinx.coroutines.test)
+    integrationTestImplementation(hlaeja.springboot.starter.test)
+
+    integrationTestRuntimeOnly(hlaeja.junit.platform.launcher)
 }
 
 group = "ltd.hlaeja"

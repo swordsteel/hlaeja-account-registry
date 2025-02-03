@@ -15,15 +15,6 @@ Content-Type: application/json
     ]
 }
 
-### Get accounts
-GET {{hostname}}/accounts
-
-### Get accounts by page
-GET {{hostname}}/accounts/page-1
-
-### Get accounts by page and size
-GET {{hostname}}/accounts/page-1/show-5
-
 ### update user all information
 PUT {{hostname}}/account-00000000-0000-7000-0000-000000000002
 Content-Type: application/json

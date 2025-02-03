@@ -1,0 +1,12 @@
+jwt:
+  private-key: cert/valid-private-key.pem
+
+spring:
+  r2dbc:
+    url: r2dbc:pool:postgresql://localhost:5432/test
+    username: test
+    password: test
+
+test:
+  postgres:
+    init-script: postgres/schema.sql

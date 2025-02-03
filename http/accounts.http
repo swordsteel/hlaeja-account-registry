@@ -1,0 +1,8 @@
+### Get accounts
+GET {{hostname}}/accounts
+
+### Get accounts by page
+GET {{hostname}}/accounts/page-1
+
+### Get accounts by page and size
+GET {{hostname}}/accounts/page-1/show-1

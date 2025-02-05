@@ -1,6 +1,5 @@
 package ltd.hlaeja.validator
 
-
 import io.mockk.mockk
 import ltd.hlaeja.library.accountRegistry.Account
 import org.assertj.core.api.Assertions.assertThat
@@ -17,7 +16,7 @@ class AccountValidatorTest {
             username = "validUser",
             password = "strongPassword",
             enabled = true,
-            roles = listOf("USER", "TEST")
+            roles = listOf("USER", "TEST"),
         )
 
         // when
@@ -34,7 +33,7 @@ class AccountValidatorTest {
             username = "validUser",
             password = null,
             enabled = true,
-            roles = listOf("USER")
+            roles = listOf("USER"),
         )
 
         // when
@@ -51,7 +50,7 @@ class AccountValidatorTest {
             username = "",
             password = "strongPassword",
             enabled = true,
-            roles = listOf("USER")
+            roles = listOf("USER"),
         )
 
         // when
@@ -68,7 +67,7 @@ class AccountValidatorTest {
             username = "validUser",
             password = "",
             enabled = true,
-            roles = listOf("USER")
+            roles = listOf("USER"),
         )
 
         // when
@@ -85,7 +84,7 @@ class AccountValidatorTest {
             username = "validUser",
             password = "",
             enabled = true,
-            roles = emptyList()
+            roles = emptyList(),
         )
 
         // when

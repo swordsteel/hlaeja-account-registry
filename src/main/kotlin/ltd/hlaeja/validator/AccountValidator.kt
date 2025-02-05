@@ -13,7 +13,7 @@ class AccountValidator : ConstraintValidator<ValidAccount, Any> {
         }
     }
 
-    private fun Account.Request.validate(): Boolean = username.isNotBlank()
-        && password?.isNotBlank() ?: true
-        && roles.isNotEmpty()
+    private fun Account.Request.validate(): Boolean = username.isNotBlank() &&
+        password?.isNotBlank() ?: true &&
+        roles.isNotEmpty()
 }

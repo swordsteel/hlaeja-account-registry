@@ -1,12 +1,10 @@
 package ltd.hlaeja.service
 
 import io.github.oshai.kotlinlogging.KotlinLogging
-import java.lang.IllegalArgumentException
 import java.util.UUID
 import ltd.hlaeja.entity.AccountEntity
 import ltd.hlaeja.repository.AccountRepository
 import org.springframework.dao.DuplicateKeyException
-import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.CONFLICT
 import org.springframework.http.HttpStatus.NOT_FOUND

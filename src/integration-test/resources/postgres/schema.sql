@@ -72,7 +72,6 @@ CREATE OR REPLACE TRIGGER accounts_audit_trigger
   ON public.accounts
   FOR EACH ROW
 EXECUTE FUNCTION public.accounts_audit();
-
 -- Test data
 insert into public.accounts (id, created_at, updated_at, enabled, username, password, roles)
 values ('00000000-0000-7000-0000-000000000001'::uuid, '2000-01-01 00:00:00.000001 +00:00', '2000-01-01 00:00:01.000001 +00:00', true, 'admin', '$2a$12$KoXBoLOANMK11J4xeJHPA.Sy0FG.m8KWk7P4XFsMO.ZbFmFI2DckK', 'ROLE_ADMIN'),

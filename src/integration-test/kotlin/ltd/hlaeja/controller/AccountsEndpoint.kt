@@ -1,16 +1,10 @@
 package ltd.hlaeja.controller
 
-import java.util.UUID
 import ltd.hlaeja.library.accountRegistry.Account
 import ltd.hlaeja.test.container.PostgresContainer
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.SoftAssertions
-import org.assertj.core.api.junit.jupiter.InjectSoftAssertions
-import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.springframework.boot.test.context.SpringBootTest
@@ -21,7 +15,6 @@ import org.springframework.test.web.reactive.server.expectBody
 
 @PostgresContainer
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@ExtendWith(SoftAssertionsExtension::class)
 class AccountsEndpoint {
 
     @LocalServerPort
@@ -52,7 +45,7 @@ class AccountsEndpoint {
         value = [
             "1,3",
             "2,0",
-        ]
+        ],
     )
     fun `get accounts with pages`(page: Int, expected: Int) {
         // when
@@ -83,7 +76,7 @@ class AccountsEndpoint {
             "3,2,0",
             "1,5,3",
             "2,5,0",
-        ]
+        ],
     )
     fun `get accounts with pages and size to show`(page: Int, show: Int, expected: Int) {
         // when
@@ -106,7 +99,7 @@ class AccountsEndpoint {
             "1,-1",
             "-1,1",
             "-1,-1",
-        ]
+        ],
     )
     fun `get accounts with bad pages or bad size to show`(page: Int, show: Int) {
         // when

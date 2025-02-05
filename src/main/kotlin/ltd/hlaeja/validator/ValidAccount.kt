@@ -11,5 +11,5 @@ import kotlin.reflect.KClass
 annotation class ValidAccount(
     val message: String = "Roles must not be empty",
     val groups: Array<KClass<out Any>> = [],
-    val payload: Array<KClass<out Payload>> = []
+    val payload: Array<KClass<out Payload>> = [],
 )

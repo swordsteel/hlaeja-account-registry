@@ -8,6 +8,7 @@ plugins {
 }
 
 dependencies {
+    implementation(hlaeja.fasterxml.jackson.module.kotlin)
     implementation(hlaeja.kotlin.logging)
     implementation(hlaeja.kotlin.reflect)
     implementation(hlaeja.kotlinx.coroutines)

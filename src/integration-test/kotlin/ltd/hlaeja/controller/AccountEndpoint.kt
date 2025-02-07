@@ -195,7 +195,6 @@ class AccountEndpoint {
             // then
             result.expectStatus().isNotFound
         }
-
     }
 
     @Nested

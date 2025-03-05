@@ -71,6 +71,17 @@ snapshot_version() {
   sed -i "s/\(version\s*=\s*\)[0-9.]*/\1$new_version-SNAPSHOT/" gradle.properties
 }
 
+handle_sql_files() {
+  version=$(current_version)
+  sql_dir="sql"
+  version_dir="${sql_dir}/v${version}"
+  if [ -d "$sql_dir" ] && [ -n "$(ls -A $sql_dir/*.sql 2>/dev/null)" ]; then
+    mkdir -p "$version_dir"
+    mv "$sql_dir"/*.sql "$version_dir/"
+    git add "$sql_dir"
+  fi
+}
+
 # check and prepare for release
 check_active_branch master
 check_uncommitted_changes
@@ -85,5 +96,6 @@ un_snapshot_version catalog
 # release changes and prepare for next release
 commit_change "release version: $(current_version)"
 add_release_tag
+handle_sql_files
 snapshot_version
 commit_change 'bump version'

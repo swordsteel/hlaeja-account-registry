@@ -1,0 +1,5 @@
+### get actuator
+GET {{hostname}}/actuator
+
+### get actuator health
+GET {{hostname}}/actuator/health

@@ -10,6 +10,20 @@ spring:
         name: "%APP_BUILD_OS_NAME%"
         version: "%APP_BUILD_OS_VERSION%"
 
+management:
+  endpoints:
+    access:
+      default: none
+    web:
+      exposure:
+        include: "health,info"
+  endpoint:
+    health:
+      show-details: always
+      access: read_only
+    info:
+      access: read_only
+
 jwt:
   private-key: cert/private_key.pem
 

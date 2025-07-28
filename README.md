@@ -16,7 +16,7 @@ In twilight's hush, where mythic tales unfold, A ledger of legends, the bravest 
 
 ## Development Configuration
 
-Run `release.sh` script from `master` branch.
+Run release pipeline from `master` branch.
 
 ## Development Information
 

@@ -1,10 +1,10 @@
 plugins {
     alias(hlaeja.plugins.kotlin.jvm)
     alias(hlaeja.plugins.kotlin.spring)
-    alias(hlaeja.plugins.ltd.hlaeja.plugin.certificate)
-    alias(hlaeja.plugins.ltd.hlaeja.plugin.service)
+    alias(hlaeja.plugins.spring.boot)
     alias(hlaeja.plugins.spring.dependency.management)
-    alias(hlaeja.plugins.springframework.boot)
+    alias(hlaeja.plugins.certificate)
+    alias(hlaeja.plugins.service)
 }
 
 dependencies {
@@ -32,14 +32,14 @@ dependencies {
 
     testRuntimeOnly(hlaeja.junit.platform.launcher)
 
-    integrationTestImplementation(hlaeja.assertj.core)
-    integrationTestImplementation(hlaeja.library.test)
-    integrationTestImplementation(hlaeja.projectreactor.reactor.test)
-    integrationTestImplementation(hlaeja.kotlin.test.junit5)
-    integrationTestImplementation(hlaeja.kotlinx.coroutines.test)
-    integrationTestImplementation(hlaeja.springboot.starter.test)
+    testIntegrationImplementation(hlaeja.assertj.core)
+    testIntegrationImplementation(hlaeja.library.test)
+    testIntegrationImplementation(hlaeja.projectreactor.reactor.test)
+    testIntegrationImplementation(hlaeja.kotlin.test.junit5)
+    testIntegrationImplementation(hlaeja.kotlinx.coroutines.test)
+    testIntegrationImplementation(hlaeja.springboot.starter.test)
 
-    integrationTestRuntimeOnly(hlaeja.junit.platform.launcher)
+    testIntegrationRuntimeOnly(hlaeja.junit.platform.launcher)
 }
 
 group = "ltd.hlaeja"
